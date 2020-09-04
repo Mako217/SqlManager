@@ -1,0 +1,9 @@
+C:\Users\user\source\repos\SqlManager\ClassLibrary\bin\Debug\netstandard2.0\ClassLibrary.deps.json
+C:\Users\user\source\repos\SqlManager\ClassLibrary\bin\Debug\netstandard2.0\ClassLibrary.dll
+C:\Users\user\source\repos\SqlManager\ClassLibrary\bin\Debug\netstandard2.0\ClassLibrary.pdb
+C:\Users\user\source\repos\SqlManager\ClassLibrary\obj\Debug\netstandard2.0\ClassLibrary.csprojAssemblyReference.cache
+C:\Users\user\source\repos\SqlManager\ClassLibrary\obj\Debug\netstandard2.0\ClassLibrary.AssemblyInfoInputs.cache
+C:\Users\user\source\repos\SqlManager\ClassLibrary\obj\Debug\netstandard2.0\ClassLibrary.AssemblyInfo.cs
+C:\Users\user\source\repos\SqlManager\ClassLibrary\obj\Debug\netstandard2.0\ClassLibrary.csproj.CoreCompileInputs.cache
+C:\Users\user\source\repos\SqlManager\ClassLibrary\obj\Debug\netstandard2.0\ClassLibrary.dll
+C:\Users\user\source\repos\SqlManager\ClassLibrary\obj\Debug\netstandard2.0\ClassLibrary.pdb
