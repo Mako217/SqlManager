@@ -7,6 +7,8 @@ namespace SqlManager
     {
         static void Main(string[] args)
         {
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.CursorVisible = false;
             string ConnectionString = "Data Source = MICHAŁ; Integrated Security = True;";
 
             DatabaseDialog databaseDialog = new DatabaseDialog(ConnectionString);

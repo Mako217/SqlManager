@@ -6,6 +6,7 @@ namespace ClassLibrary
         {
             ConnectionString = connectionString;
             Add("--Print Table--");
+            Add("--Edit table--");
             Add("--Add new row--");
             Add("--Delete Table--");
             Add("--Return--");
@@ -21,12 +22,15 @@ namespace ClassLibrary
                 TablePrinter.Print(ConnectionString, databaseDialog, whichDatabase, tableDialog, whichTable, this);
                 break;
                 case 1:
-                RowAdder.Add(ConnectionString, databaseDialog, whichDatabase, tableDialog, whichTable, this);
+                TableEditor.Control(ConnectionString, databaseDialog, whichDatabase, tableDialog, whichTable, this);
                 break;
                 case 2:
-                TableDeleter.Delete(ConnectionString, databaseDialog, whichDatabase, tableDialog, whichTable, this);
+                RowAdder.Add(ConnectionString, databaseDialog, whichDatabase, tableDialog, whichTable, this);
                 break;
                 case 3:
+                TableDeleter.Delete(ConnectionString, databaseDialog, whichDatabase, tableDialog, whichTable, this);
+                break;
+                case 4:
                 tableDialog.Start(databaseDialog, whichDatabase, this);
                 break;
 
