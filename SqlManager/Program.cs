@@ -9,7 +9,9 @@ namespace SqlManager
         {
             Console.ForegroundColor = ConsoleColor.White;
             Console.CursorVisible = false;
-            string ConnectionString = "Data Source = MICHAŁ; Integrated Security = True;";
+
+            //Pass your connection string without Initial Catalog
+            string ConnectionString = "Data Source = (Your data source); Integrated Security = True;";
 
             DatabaseDialog databaseDialog = new DatabaseDialog(ConnectionString);
             TableDialog tableDialog = new TableDialog(ConnectionString);
