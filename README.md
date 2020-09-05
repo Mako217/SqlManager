@@ -14,7 +14,7 @@ Jak ma wyglądać zmienna ***connectionString***:
 Jeśli poprawnie podano connectionString, po uruchomieniu programu pojawi się lista baz danych zapisanych na serwerze oraz opcja:
 - ***--Add new database--*** - pozwalająca utworzyć na serwerze nową bazę danych.
 
-Poruszać się po menu można za pomocą ***strzałki w górę i strzałki w dół***, aktualnie wybrania opcja zaznaczona jest symbolem "<".
+Poruszać się po menu można za pomocą ***strzałki w górę i strzałki w dół***, aktualnie wybrania opcja zaznaczona jest kolorem niebieskim.
 Wciśnięcie klawisza ***Escape*** spowoduje zakończenie programu. Klawisz ***Enter*** natomiast zatwierdza aktualnie wybraną opcję.<br/>
 Zatwierdzenie bazy danych wyświetli menu zawierające wszystkie tabele znajdujące się w wybranej bazie danych, oraz opcje zarządzania bazą danych:
 - ***--Add new Table--*** - pozwalająca dodać nową tabelę w bazie danych.
