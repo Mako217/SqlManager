@@ -36,7 +36,7 @@ namespace ClassLibrary
             int whichDatabase = Control();
             if(whichDatabase == options.Count-1)
                 {
-                    DatabaseManager.AddNew(ConnectionString);
+                    DatabaseAdder.Add(ConnectionString, this, tableDialog, tableOptions);
                 }
                 else
                 {

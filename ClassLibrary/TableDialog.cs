@@ -1,3 +1,4 @@
+using System;
 using System.Data.SqlClient;
 using System.Data;
 
@@ -27,17 +28,23 @@ namespace ClassLibrary
             connection.Close();
             adapter.Dispose();
             dataTable.Dispose();
-            connection.Dispose();
             Add("--Add new Table--");
+            Add("--Delete Database--");
             Add("--Return--");
+
+            
         }
         public void Start(DatabaseDialog databaseDialog, int whichDatabase, TableOptions tableOptions)
         {
             UpdateList(databaseDialog, whichDatabase);
             int whichTable = Control();
-            if(whichTable == options.Count - 2)
+            if(whichTable == options.Count - 3)
             {
                 TableAdder.Add(ConnectionString, databaseDialog, whichDatabase, this, tableOptions);
+            }
+            else if(whichTable == options.Count-2)
+            {
+                DatabaseDeleter.Delete(ConnectionString, databaseDialog, whichDatabase, this, tableOptions);
             }
             else if(whichTable == options.Count - 1)
             {

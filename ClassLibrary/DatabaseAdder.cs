@@ -3,9 +3,9 @@ using System.Data.SqlClient;
 
 namespace ClassLibrary
 {
-    public static class DatabaseManager
+    public static class DatabaseAdder
     {
-        public static void AddNew(string connectionString)
+        public static void Add(string connectionString, DatabaseDialog databaseDialog, TableDialog tableDialog, TableOptions tableOptions)
         {
             Console.WriteLine("Enter new database name:");
             string databaseName = Console.ReadLine();
@@ -16,6 +16,9 @@ namespace ClassLibrary
             command.Dispose();
             connection.Close();
             connection.Dispose();
+
+            databaseDialog.Start(tableDialog, tableOptions);
+
         }
     }
 }
