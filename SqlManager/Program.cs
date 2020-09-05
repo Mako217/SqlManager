@@ -7,6 +7,7 @@ namespace SqlManager
     {
         static void Main(string[] args)
         {
+            Console.ForegroundColor = ConsoleColor.White;
             Console.CursorVisible = false;
 
             //Pass your connection string without Initial Catalog

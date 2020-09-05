@@ -65,7 +65,9 @@ namespace ClassLibrary
             {
                 if (i == currentOne)
                 {
-                    Console.WriteLine(options[i] + "<");
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.WriteLine(options[i]);
+                    Console.ForegroundColor = ConsoleColor.White;
                 }
                 else
                 {
