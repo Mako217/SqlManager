@@ -43,7 +43,7 @@ namespace ClassLibrary
                 TableAdder.Add(ConnectionString, databaseDialog, whichDatabase, this, tableOptions);
             }
             else if(whichTable == options.Count-2)
-            {
+            {  
                 DatabaseDeleter.Delete(ConnectionString, databaseDialog, whichDatabase, this, tableOptions);
             }
             else if(whichTable == options.Count - 1)
