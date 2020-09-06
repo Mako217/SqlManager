@@ -11,40 +11,41 @@ namespace ClassLibrary
         {
             DataTable dataTable = new DataTable();
             SqlConnection connection = new SqlConnection(connectionString + $"Initial Catalog={databaseDialog.options[whichDatabase]}");
-            SqlDataAdapter adapter = new SqlDataAdapter($"Select Column_Name From INFORMATION_SCHEMA.COLUMNS where Table_Name = '{tableDialog.options[whichTable]}' ", connection);
+            SqlDataAdapter adapter = new SqlDataAdapter($"Select Column_Name, Data_Type From INFORMATION_SCHEMA.COLUMNS where Table_Name = '{tableDialog.options[whichTable]}' ", connection);
             connection.Open();
             adapter.Fill(dataTable);
             List<string> columnList = new List<string>();
-            List<string> values = new List<string>();
             string columns = "";
-            string columnsAt = "";
+            string values = "";
             for(int i = 0; i<dataTable.Rows.Count; i++)
             {
                 Console.Clear();
                 DataRow row = dataTable.Rows[i];
                 columns += (string)row.ItemArray[0] + ", ";
-                columnsAt += "@" + (string)row.ItemArray[0] + ", ";
-                columnList.Add("@" + (string)row.ItemArray[0]);
                 Console.WriteLine("Add " + (string)row.ItemArray[0] + " value:");
-                values.Add(Console.ReadLine());
+                if((string)row.ItemArray[1] == "varchar")
+                {
+                    values += "'" + Console.ReadLine() + "', ";
+                }
+                else
+                {
+                    values += Console.ReadLine() + ", ";
+                }
             }
             columns = columns.Substring(0, columns.Length - 2);
-            columnsAt = columnsAt.Substring(0, columnsAt.Length - 2);
+            values = values.Substring(0, values.Length - 2);
             dataTable.Dispose();
             adapter.Dispose();
 
-            SqlCommand command = new SqlCommand($"INSERT INTO [{tableDialog.options[whichTable]}]({columns}) VALUES({columnsAt})", connection);
-            for(int i = 0; i<columnList.Count; i++)
-            {
-                command.Parameters.AddWithValue(columnList[i], values[i]);
-            }
+            SqlCommand command = new SqlCommand($"INSERT INTO [{tableDialog.options[whichTable]}]({columns}) VALUES({values})", connection);
             try
             {
                 command.ExecuteNonQuery();
             }
-            catch
+            catch(Exception e)
             {
-                Console.WriteLine("Error");
+                Console.WriteLine(e);
+                Console.WriteLine();
                 Console.ReadLine();
             }
             command.Dispose();

@@ -10,7 +10,7 @@ namespace ClassLibrary
         public static void Add(string connectionString, DatabaseDialog databaseDialog, int whichDatabase, TableDialog tableDialog, TableOptions tableOptions)
         {
             Console.Clear();
-            Console.WriteLine("Enter table name");
+            Console.WriteLine("Enter table name:");
             string tableName = Console.ReadLine();
             Console.Clear();
             Console.WriteLine("Enter amount of columns in the table:");

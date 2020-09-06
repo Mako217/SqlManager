@@ -14,18 +14,19 @@ namespace ClassLibrary
             SqlConnection connection = new SqlConnection(connectionString + $"Initial Catalog={databaseDialog.options[whichDatabase]}");
             DataTable dataTable = new DataTable();
 
-            using (connection)
-            using (SqlDataAdapter adapter = new SqlDataAdapter($"SELECT * FROM {tableDialog.options[whichTable]}", connection))
-            {
-                Console.Clear();
-                connection.Open();
-                adapter.Fill(dataTable);
-               
-            }
+            SqlDataAdapter adapter = new SqlDataAdapter($"SELECT * FROM {tableDialog.options[whichTable]}", connection);
+            connection.Open();
+            adapter.Fill(dataTable);
+
+            SqlDataAdapter columnNames = new SqlDataAdapter($"Select column_name, data_type from information_schema.columns where table_name = '{tableDialog.options[whichTable]}'", connection);
+            DataTable columns = new DataTable();
+            columnNames.Fill(columns);
+            connection.Close();
+
             int cellY = 0;
             int cellX = 0;
             bool inside = true;
-            TablePrinter.PrintEditor(dataTable, cellX, cellY);
+            TablePrinter.PrintEditor(dataTable, columns,  cellX, cellY);
             while(inside)
             {
                 if(Console.KeyAvailable)
@@ -37,29 +38,29 @@ namespace ClassLibrary
                             if(cellX>0)
                             {
                                 cellX--;
+                                TablePrinter.PrintEditor(dataTable, columns, cellX, cellY);
                             }
-                            TablePrinter.PrintEditor(dataTable, cellX, cellY);
                             break;
                         case ConsoleKey.RightArrow:
                             if(cellX<dataTable.Rows[0].ItemArray.Length - 1)
                             {
                                 cellX++;
+                                TablePrinter.PrintEditor(dataTable, columns, cellX, cellY);
                             }
-                            TablePrinter.PrintEditor(dataTable, cellX, cellY);
                             break;
                         case ConsoleKey.UpArrow:
                             if(cellY>0)
                             {
                                 cellY--;
+                                TablePrinter.PrintEditor(dataTable, columns, cellX, cellY);
                             }
-                            TablePrinter.PrintEditor(dataTable, cellX, cellY);
                             break;
                         case ConsoleKey.DownArrow:
                             if(cellY<dataTable.Rows.Count - 1)
                             {
                                 cellY++;
+                                TablePrinter.PrintEditor(dataTable, columns, cellX, cellY);
                             }
-                            TablePrinter.PrintEditor(dataTable, cellX, cellY);
                             break;
                         case ConsoleKey.Escape:
                             Console.Clear();
@@ -70,21 +71,20 @@ namespace ClassLibrary
                             inside = false;
                             break;        
                     }
+                    //marka, model, cena, kolor, kraj produkcji, nowy/używany
                 }
             }
-            Edit(connectionString, databaseDialog, whichDatabase, tableDialog, whichTable, dataTable, cellX, cellY);
+            Edit(connectionString, databaseDialog, whichDatabase, tableDialog, whichTable, dataTable, columns, cellX, cellY);
 
             Control(connectionString, databaseDialog, whichDatabase, tableDialog, whichTable, tableOptions);
         } 
 
-        public static void Edit(string connectionString,DatabaseDialog databaseDialog, int whichDatabase, TableDialog tableDialog, int whichTable, DataTable dataTable, int cellX, int cellY)
+        public static void Edit(string connectionString,DatabaseDialog databaseDialog, int whichDatabase, TableDialog tableDialog, int whichTable, DataTable dataTable, DataTable columns, int cellX, int cellY)
         {
+            
             SqlConnection connection = new SqlConnection(connectionString + $"Initial Catalog = {databaseDialog.options[whichDatabase]}");
             connection.Open();
-            SqlDataAdapter adapter = new SqlDataAdapter($"Select column_name, data_type from information_schema.columns where table_name = '{tableDialog.options[whichTable]}'", connection);
-            DataTable columns = new DataTable();
-            adapter.Fill(columns);
-            adapter.Dispose();
+            
             string set = "";
             string columnString = "";
             Console.Clear();

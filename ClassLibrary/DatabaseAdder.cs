@@ -7,6 +7,7 @@ namespace ClassLibrary
     {
         public static void Add(string connectionString, DatabaseDialog databaseDialog, TableDialog tableDialog, TableOptions tableOptions)
         {
+            Console.Clear();
             Console.WriteLine("Enter new database name:");
             string databaseName = Console.ReadLine();
             SqlConnection connection = new SqlConnection(connectionString);
