@@ -11,7 +11,7 @@ namespace SqlManager
             Console.CursorVisible = false;
 
             //Pass your connection string without Initial Catalog
-            string ConnectionString = "Data Source = (Your data source); Integrated Security = True;";
+            string ConnectionString = "Data Source = Michał; Integrated Security = True;";
 
             DatabaseDialog databaseDialog = new DatabaseDialog(ConnectionString);
             TableDialog tableDialog = new TableDialog(ConnectionString);

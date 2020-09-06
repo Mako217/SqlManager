@@ -20,13 +20,21 @@ namespace ClassLibrary
                 Console.Clear();
                 DataTable dataTable = new DataTable();
                 adapter.Fill(dataTable);
-                Console.WriteLine($"|{columns.Rows[0].ItemArray[0]}");
+                ConsoleColor color = ConsoleColor.DarkGray;
+                Console.ForegroundColor = color;
+                Console.Write("|");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine($"{columns.Rows[0].ItemArray[0]}");
                 Console.SetCursorPosition(0,1);
+                Console.ForegroundColor = color;
                 Console.WriteLine(new string('=', (columns.Rows.Count)*20));
                 for(int i=1; i<columns.Rows.Count; i++)
                 {
                     Console.SetCursorPosition(i*20, 0);
-                    Console.Write($"|{columns.Rows[i].ItemArray[0]}");
+                    Console.Write("|");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.Write($"{columns.Rows[i].ItemArray[0]}");
+                    Console.ForegroundColor = color;
                     Console.SetCursorPosition(i*20, 1);
                     Console.Write("|");
                 }
@@ -49,8 +57,9 @@ namespace ClassLibrary
                     {
 
                         var item = row.ItemArray[j - 1];
-                        
+                        Console.ForegroundColor = ConsoleColor.White;
                         Console.Write(item);
+                        Console.ForegroundColor = color;
                         Console.SetCursorPosition(20 * j, i+2);
                         Console.Write("|");
                         Console.SetCursorPosition(20 *j, i+3);
@@ -59,25 +68,34 @@ namespace ClassLibrary
                     }
                     Console.SetCursorPosition(0, i+3);
                 }
+                Console.ForegroundColor = ConsoleColor.White;
                 dataTable.Dispose();
                 columns.Dispose();
             }
             connection.Close();
             connection.Dispose();
-            Console.ReadLine();
+            Console.ReadKey();
             tableOptions.Start(databaseDialog, whichDatabase, tableDialog, whichTable);
         }
          
         public static void PrintEditor(DataTable dataTable, DataTable columns, int cellX, int cellY)
         {
+            ConsoleColor color = ConsoleColor.DarkGray;
             Console.Clear();
-            Console.WriteLine($"|{columns.Rows[0].ItemArray[0]}");
+            Console.ForegroundColor = color;
+            Console.Write("|");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine($"{columns.Rows[0].ItemArray[0]}");
             Console.SetCursorPosition(0,1);
+            Console.ForegroundColor = color;
             Console.WriteLine(new string('=', columns.Rows.Count*20));
             for(int i=1; i<columns.Rows.Count; i++)
             {
                 Console.SetCursorPosition(i*20, 0);
-                Console.Write($"|{columns.Rows[i].ItemArray[0]}");
+                Console.Write("|");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write($"{columns.Rows[i].ItemArray[0]}");
+                Console.ForegroundColor = color;
                 Console.SetCursorPosition(i*20, 1);
                 Console.Write("|");
             }
@@ -97,6 +115,7 @@ namespace ClassLibrary
                 {
                     Console.Write("|");
                     DataRow row = dataTable.Rows[i];
+                    Console.ForegroundColor = ConsoleColor.White;
                     for (int j = 1; j <= row.ItemArray.Length; j++)
                     {  
                         if(i == cellY && j - 1 == cellX)
@@ -104,11 +123,12 @@ namespace ClassLibrary
                             Console.ForegroundColor = ConsoleColor.Blue;
                         }
                         var item = row.ItemArray[j - 1];
-                        Console.Write(item);
-                        if(Console.ForegroundColor == ConsoleColor.Blue)
+                        if(Console.ForegroundColor != ConsoleColor.Blue)
                         {
                             Console.ForegroundColor = ConsoleColor.White;
                         }
+                        Console.Write(item);
+                        Console.ForegroundColor = color;
                         Console.SetCursorPosition(20 * j, i);
                         Console.Write("|");
                         Console.SetCursorPosition(20 *j, i+3);
