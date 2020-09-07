@@ -32,3 +32,35 @@ Po wybraniu dowolnej opcji należy postępować zgodnie z instrukcjami podanymi 
 
 ## Program
 Program tworzy obiekty ***databaseDialog***, ***tableDialog***, oraz ***tableOptions***, zmienną ***connectionString***, wyłącza widoczność kursora, oraz wywołuje funkcję ***databaseDialog.Start()***;
+
+## ClassLibrary
+
+Jest to biblioteka klas, zawierająca 11 klas, w tym 7 klas statycznych i jedną klasę abstrakcyjną
+
+### Dialog
+
+Jest to klasa abstrakcyjna, która odpowiada za stworzenie listy opcji w danym menu, a także wyświetlanie, oraz kontrolę takiego menu.<br/>
+Zawiera ona następujące metody:
+- ***Add()*** - publiczna metoda typu void pozwalająca dodać nową opcję do listy
+- ***Control()*** - publiczna funkcja typu int, odpowiadająca za poruszanie się po menu, oraz zatwierdzanie opcji, zwraca ona która opcja została wybrana.
+- ***Draw()*** - funkcja typu void, odpowiadająca za wypisanie menu.
+
+### DatabaseDialog
+
+Jest to klasa dziedzicząca z klasy abstrakcyjnej ***Dialog***. Odpowiada ona za menu wyświetlające listę baz danych, oraz pozwalające dodać nową bazę danych.<br/>
+Zawiera ona następujące metody:
+- ***UpdateList()*** - prywatna metoda typu void, pozwalająca na zaktualizowanie listy opcji, w oparciu o informacje pobrane z bazy danych.
+- ***Start()*** - publiczna metoda pozwalająca rozpocząć wyświetlanie oraz kontrolowanie menu.
+
+### TableDialog
+
+Jest to klasa dziedzicząca z klasy abstrakcyjnej ***Dialog***. Odpowiada ona za menu wyświetlające listę tabel w bazie danych, oraz opcje kontrolowania wybranej bazy danych.<br/>
+Zawiera ona następujące metody:
+- ***UpdateList()*** - prywatna metoda typu void, pozwalająca na zaktualizowanie listy opcji, w oparciu o informacje pobrane z bazy danych.
+- ***Start()*** - publiczna metoda pozwalająca rozpocząć wyświetlanie oraz kontrolowanie menu.
+
+### TableOptions
+
+Jest to klasa dziedzicząca z klasy abstrakcyjnej ***Dialog***, odpowiada ona za menu wyświetlające opcje zarządzania tabelą.<br/>
+Zawiera ona metodę:
+- ***Start*** - publiczna metoda pozwalająca rozpocząć wyświetlanie oraz kontrolowanie menu.
