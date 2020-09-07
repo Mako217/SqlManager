@@ -65,3 +65,36 @@ Zawiera ona następujące metody:
 Jest to klasa dziedzicząca z klasy abstrakcyjnej ***Dialog***, odpowiada ona za menu wyświetlające opcje zarządzania tabelą.<br/>
 Zawiera ona metodę:
 - ***Start*** - publiczna metoda pozwalająca rozpocząć wyświetlanie oraz kontrolowanie menu.
+
+### DatabaseAdder
+
+Jest to klasa statyczna, zawierająca statyczną metodę ***Add()***, pozwalającą dodać nową bazę danych do serwera.
+
+### DatabaseDeleter
+
+Jest to klasa statyczna, zawierająca statyczną metodę ***Delete()***, pozwalającą usunąć aktualnie wybraną bazę danych.
+
+### TableAdder
+
+Jest to klasa statyczna, zawierająca statyczną metodę ***Add()***, pozwalającą dodać nową bazę tabelę do bazy danych.
+
+### TableDeleter
+
+Jest to klasa statyczna, zawierająca statyczną metodę ***Delete()***, pozwalającą usunąć aktualnie wybraną tablicę.
+
+### TablePrinter
+
+Jest to klasa statyczna, która zawiera dwie metody statyczne:
+- ***Print*** - pozwalająca wyświetlić aktualnie wybraną tablicę w formie graficznej.
+- ***PrintEdit*** - pozwalająca wyświetlić aktualnie wybraną tablicę, zaznaczając kolorem, aktualnie wybraną komórkę.
+
+### RowAdder
+
+Jest to klasa statyczna, zawierająca statyczną metodę ***Add()***, pozwalającą dodać nowy wiersz, do aktualnie wybranej tablicy.
+
+Jest to funkcja statyczna, która zawiera dwie metody statyczne
+- ***Control*** - odpowiadająca za nawigację pomiędzy komórkami tablicy.
+- ***Edit*** - prywatna funkcja odpowiadająca za edytowanie zawartości aktualnie wybranej komórki.
+
+
+
