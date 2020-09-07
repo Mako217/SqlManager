@@ -1,14 +1,15 @@
 # SqlManager
-Konsolowa aplikacja umożliwiająca zarządzania bazami danych na serwerze MS SQL.
+Konsolowa aplikacja umożliwiająca zarządzania bazami danych na serwerze MS SQL Server lub PostgreSQL.
 
 ## Korzystanie z programu
 
 ### Connection string
 Aby rozpocząć korzystanie z programu należy edytować zmienną ***connectionString*** w pliku ***Program.cs***.<br/> <br/>
 Jak ma wyglądać zmienna ***connectionString***:
-- ***Data Source = (serwer); Integrated Security = true;*** - jeżeli korzystamy z Integrated Security
-- ***Data Source = (serwer); Integrated Security = false; User ID = (ID); Password = (hasło);*** - jeżeli nie korzystamy z Integrated Security
-<h3>Ważne jest to aby connectionString kończył się średnikiem! Nie należy również podawać wartości Inital Catalog!</h3>
+- ***Data Source = (serwer); Integrated Security = true;*** - jeżeli korzystamy z Integrated Security MSSQL Servera
+- ***Data Source = (serwer); Integrated Security = false; User ID = (ID); Password = (hasło);*** - jeżeli nie korzystamy z Integrated Security MSSQL Servera
+- ***Server = (serwer); Port=5432; Uid = (ID); Pwd = (hasło)*** - jeżeli korzystamy z PostgreSQL
+<h3>Ważne jest to aby connectionString kończył się średnikiem! Nie należy również podawać wartości Inital Catalog w przypadku korzystania z MSSQL Server, lub wartości Database w przypadku korzystania z PostgreSQL!</h3>
 
 ### Nawigacja po programie
 Jeśli poprawnie podano connectionString, po uruchomieniu programu pojawi się lista baz danych zapisanych na serwerze oraz opcja:
