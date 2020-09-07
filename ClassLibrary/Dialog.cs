@@ -10,10 +10,12 @@ namespace ClassLibrary
         public List<string> options{get; private set;} = new List<string>();
         private int currentOne = 0;
         private bool inside = true;
+        public string ServerType;
 
-        public Dialog(string connectionString)
+        public Dialog(string connectionString, string serverType)
         {
             ConnectionString = connectionString;
+            ServerType = serverType;
         }
 
         public int Control()

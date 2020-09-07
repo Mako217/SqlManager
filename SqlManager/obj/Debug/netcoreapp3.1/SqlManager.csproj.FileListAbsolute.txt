@@ -20,3 +20,4 @@ C:\Users\user\source\repos\SqlManager\SqlManager\obj\Debug\netcoreapp3.1\SqlMana
 C:\Users\user\source\repos\SqlManager\SqlManager\obj\Debug\netcoreapp3.1\SqlManager.dll
 C:\Users\user\source\repos\SqlManager\SqlManager\obj\Debug\netcoreapp3.1\SqlManager.pdb
 C:\Users\user\source\repos\SqlManager\SqlManager\obj\Debug\netcoreapp3.1\SqlManager.genruntimeconfig.cache
+C:\Users\user\source\repos\SqlManager\SqlManager\bin\Debug\netcoreapp3.1\Npgsql.dll

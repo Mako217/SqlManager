@@ -2,8 +2,9 @@ namespace ClassLibrary
 {
     public class TableOptions : Dialog
     {
-        public TableOptions(string connectionString) : base(connectionString)
+        public TableOptions(string connectionString, string serverType) : base(connectionString, serverType)
         {
+            ServerType = serverType;
             ConnectionString = connectionString;
             Add("--Print Table--");
             Add("--Edit table--");
@@ -19,16 +20,16 @@ namespace ClassLibrary
             switch(option)
             {
                 case 0:
-                TablePrinter.Print(ConnectionString, databaseDialog, whichDatabase, tableDialog, whichTable, this);
+                TablePrinter.Print(ConnectionString, ServerType, databaseDialog, whichDatabase, tableDialog, whichTable, this);
                 break;
                 case 1:
-                TableEditor.Control(ConnectionString, databaseDialog, whichDatabase, tableDialog, whichTable, this);
+                TableEditor.Control(ConnectionString, ServerType, databaseDialog, whichDatabase, tableDialog, whichTable, this);
                 break;
                 case 2:
-                RowAdder.Add(ConnectionString, databaseDialog, whichDatabase, tableDialog, whichTable, this);
+                RowAdder.Add(ConnectionString, ServerType, databaseDialog, whichDatabase, tableDialog, whichTable, this);
                 break;
                 case 3:
-                TableDeleter.Delete(ConnectionString, databaseDialog, whichDatabase, tableDialog, whichTable, this);
+                TableDeleter.Delete(ConnectionString, ServerType, databaseDialog, whichDatabase, tableDialog, whichTable, this);
                 break;
                 case 4:
                 tableDialog.Start(databaseDialog, whichDatabase, this);

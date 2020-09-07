@@ -1,6 +1,7 @@
 using System;
 using System.Data;
 using System.Data.SqlClient;
+using Npgsql;
 
 namespace ClassLibrary
 {
@@ -8,21 +9,34 @@ namespace ClassLibrary
     {
 
 
-        public static void Control(string connectionString, DatabaseDialog databaseDialog, int whichDatabase, TableDialog tableDialog, int whichTable, TableOptions tableOptions)
+        public static void Control(string connectionString, string serverType, DatabaseDialog databaseDialog, int whichDatabase, TableDialog tableDialog, int whichTable, TableOptions tableOptions)
         {
-            
-            SqlConnection connection = new SqlConnection(connectionString + $"Initial Catalog={databaseDialog.options[whichDatabase]}");
             DataTable dataTable = new DataTable();
-
-            SqlDataAdapter adapter = new SqlDataAdapter($"SELECT * FROM {tableDialog.options[whichTable]}", connection);
-            connection.Open();
-            adapter.Fill(dataTable);
-
-            SqlDataAdapter columnNames = new SqlDataAdapter($"Select column_name, data_type from information_schema.columns where table_name = '{tableDialog.options[whichTable]}'", connection);
             DataTable columns = new DataTable();
-            columnNames.Fill(columns);
-            connection.Close();
+            if(serverType == "MSSQL Server")
+            {   
+                SqlConnection connection = new SqlConnection(connectionString + $"Initial Catalog={databaseDialog.options[whichDatabase]}");  
 
+                SqlDataAdapter adapter = new SqlDataAdapter($"SELECT * FROM {tableDialog.options[whichTable]}", connection);
+                connection.Open();
+                adapter.Fill(dataTable);
+
+                SqlDataAdapter columnNames = new SqlDataAdapter($"Select column_name, data_type from information_schema.columns where table_name = '{tableDialog.options[whichTable]}'", connection);
+                columnNames.Fill(columns);
+                connection.Close();
+            }
+            else if(serverType == "PostgreSQL")
+            {
+                NpgsqlConnection connection = new NpgsqlConnection(connectionString + $"Database={databaseDialog.options[whichDatabase]}");  
+
+                NpgsqlDataAdapter adapter = new NpgsqlDataAdapter($"SELECT * FROM {tableDialog.options[whichTable]}", connection);
+                connection.Open();
+                adapter.Fill(dataTable);
+
+                NpgsqlDataAdapter columnNames = new NpgsqlDataAdapter($"Select column_name, data_type from information_schema.columns where table_name = '{tableDialog.options[whichTable]}'", connection);
+                columnNames.Fill(columns);
+                connection.Close();
+            }
             int cellY = 0;
             int cellX = 0;
             bool inside = true;
@@ -74,16 +88,13 @@ namespace ClassLibrary
                     //marka, model, cena, kolor, kraj produkcji, nowy/używany
                 }
             }
-            Edit(connectionString, databaseDialog, whichDatabase, tableDialog, whichTable, dataTable, columns, cellX, cellY);
+            Edit(connectionString, serverType, databaseDialog, whichDatabase, tableDialog, whichTable, dataTable, columns, cellX, cellY);
 
-            Control(connectionString, databaseDialog, whichDatabase, tableDialog, whichTable, tableOptions);
+            Control(connectionString, serverType, databaseDialog, whichDatabase, tableDialog, whichTable, tableOptions);
         } 
 
-        public static void Edit(string connectionString,DatabaseDialog databaseDialog, int whichDatabase, TableDialog tableDialog, int whichTable, DataTable dataTable, DataTable columns, int cellX, int cellY)
+        private static void Edit(string connectionString, string serverType, DatabaseDialog databaseDialog, int whichDatabase, TableDialog tableDialog, int whichTable, DataTable dataTable, DataTable columns, int cellX, int cellY)
         {
-            
-            SqlConnection connection = new SqlConnection(connectionString + $"Initial Catalog = {databaseDialog.options[whichDatabase]}");
-            connection.Open();
             
             string set = "";
             string columnString = "";
@@ -93,11 +104,12 @@ namespace ClassLibrary
 
             for(int i = 0; i<dataTable.Rows[0].ItemArray.Length; i++)
             {
+               
                 if((string)columns.Rows[i].ItemArray[1] == "varchar")
                 {
                 columnString += $"{columns.Rows[i].ItemArray[0]} = '{dataTable.Rows[cellY].ItemArray[i]}' AND ";
                 }
-                else if((string)columns.Rows[i].ItemArray[1] == "int")
+                else if((string)columns.Rows[i].ItemArray[1] == "integer")
                 {
                 columnString += $"{columns.Rows[i].ItemArray[0]} = {dataTable.Rows[cellY].ItemArray[i]} AND ";    
                 }
@@ -107,18 +119,36 @@ namespace ClassLibrary
                     {
                     set += $"{columns.Rows[i].ItemArray[0]} = '{value}'";
                     }
-                    else if((string)columns.Rows[i].ItemArray[1] == "int")
+                    else if((string)columns.Rows[i].ItemArray[1] == "integer")
                     {
                     set += $"{columns.Rows[i].ItemArray[0]} = {value}";    
                     }
                 }
+                Console.WriteLine(columnString);
             }
-            columnString = columnString.Substring(0, columnString.Length-5);
-            SqlCommand command = new SqlCommand($"Update {tableDialog.options[whichTable]} set {set} where {columnString}", connection);
-            command.ExecuteNonQuery();
-            connection.Close();
-            command.Dispose();
-            connection.Dispose();
+            if(serverType == "MSSQL Server")
+            {
+                SqlConnection connection = new SqlConnection(connectionString + $"Initial Catalog = {databaseDialog.options[whichDatabase]}");
+                connection.Open();
+                columnString = columnString.Substring(0, columnString.Length-5);
+                SqlCommand command = new SqlCommand($"Update {tableDialog.options[whichTable]} set {set} where {columnString}", connection);
+                command.ExecuteNonQuery();
+                connection.Close();
+                command.Dispose();
+                connection.Dispose();
+            }
+            else if(serverType == "PostgreSQL")
+            {
+                NpgsqlConnection connection = new NpgsqlConnection(connectionString + $"Database = {databaseDialog.options[whichDatabase]}");
+                connection.Open();
+
+                columnString = columnString.Substring(0, columnString.Length-5);
+                NpgsqlCommand command = new NpgsqlCommand($"Update {tableDialog.options[whichTable]} set {set} where {columnString}", connection);
+                command.ExecuteNonQuery();
+                connection.Close();
+                command.Dispose();
+                connection.Dispose(); 
+            }
         }
     }
 }
