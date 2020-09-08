@@ -5,9 +5,9 @@ Konsolowa aplikacja umożliwiająca zarządzania bazami danych na serwerze MS SQ
 
 ### Connection string
 Aby rozpocząć korzystanie z programu należy edytować zmienną ***connectionString*** w pliku ***Program.cs***.<br/> <br/>
-Jak ma wyglądać zmienna ***connectionString***:
-- ***Data Source = (serwer); Integrated Security = true;*** - jeżeli korzystamy z Integrated Security MSSQL Servera
-- ***Data Source = (serwer); Integrated Security = false; User ID = (ID); Password = (hasło);*** - jeżeli nie korzystamy z Integrated Security MSSQL Servera
+Jak powinna wyglądać zmienna ***connectionString***:
+- ***Data Source = (serwer); Integrated Security = true;*** - jeżeli korzystamy z Integrated Security w MSSQL Server
+- ***Data Source = (serwer); Integrated Security = false; User ID = (ID); Password = (hasło);*** - jeżeli nie korzystamy z Integrated Security w MSSQL Server
 - ***Server = (serwer); Port=5432; Uid = (ID); Pwd = (hasło)*** - jeżeli korzystamy z PostgreSQL
 <h3>Ważne jest to aby connectionString kończył się średnikiem! Nie należy również podawać wartości Inital Catalog w przypadku korzystania z MSSQL Server, lub wartości Database w przypadku korzystania z PostgreSQL!</h3>
 
