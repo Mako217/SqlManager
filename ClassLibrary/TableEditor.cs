@@ -9,7 +9,7 @@ namespace ClassLibrary
     {
 
 
-        public static void Control(string connectionString, string serverType, DatabaseDialog databaseDialog, int whichDatabase, TableDialog tableDialog, int whichTable, TableOptions tableOptions)
+        public static void SelectCell(string connectionString, string serverType, DatabaseDialog databaseDialog, int whichDatabase, TableDialog tableDialog, int whichTable, TableOptions tableOptions)
         {
             DataTable dataTable = new DataTable();
             DataTable columns = new DataTable();
@@ -40,7 +40,7 @@ namespace ClassLibrary
             int cellY = 0;
             int cellX = 0;
             bool inside = true;
-            TablePrinter.PrintEditor(dataTable, columns,  cellX, cellY);
+            TablePrinter.PrintCellSelector(dataTable, columns,  cellX, cellY);
             while(inside)
             {
                 if(Console.KeyAvailable)
@@ -52,28 +52,28 @@ namespace ClassLibrary
                             if(cellX>0)
                             {
                                 cellX--;
-                                TablePrinter.PrintEditor(dataTable, columns, cellX, cellY);
+                                TablePrinter.PrintCellSelector(dataTable, columns, cellX, cellY);
                             }
                             break;
                         case ConsoleKey.RightArrow:
                             if(cellX<dataTable.Rows[0].ItemArray.Length - 1)
                             {
                                 cellX++;
-                                TablePrinter.PrintEditor(dataTable, columns, cellX, cellY);
+                                TablePrinter.PrintCellSelector(dataTable, columns, cellX, cellY);
                             }
                             break;
                         case ConsoleKey.UpArrow:
                             if(cellY>0)
                             {
                                 cellY--;
-                                TablePrinter.PrintEditor(dataTable, columns, cellX, cellY);
+                                TablePrinter.PrintCellSelector(dataTable, columns, cellX, cellY);
                             }
                             break;
                         case ConsoleKey.DownArrow:
                             if(cellY<dataTable.Rows.Count - 1)
                             {
                                 cellY++;
-                                TablePrinter.PrintEditor(dataTable, columns, cellX, cellY);
+                                TablePrinter.PrintCellSelector(dataTable, columns, cellX, cellY);
                             }
                             break;
                         case ConsoleKey.Escape:
@@ -85,12 +85,12 @@ namespace ClassLibrary
                             inside = false;
                             break;        
                     }
-                    //marka, model, cena, kolor, kraj produkcji, nowy/używany
+
                 }
             }
             Edit(connectionString, serverType, databaseDialog, whichDatabase, tableDialog, whichTable, dataTable, columns, cellX, cellY);
 
-            Control(connectionString, serverType, databaseDialog, whichDatabase, tableDialog, whichTable, tableOptions);
+            SelectCell(connectionString, serverType, databaseDialog, whichDatabase, tableDialog, whichTable, tableOptions);
         } 
 
         private static void Edit(string connectionString, string serverType, DatabaseDialog databaseDialog, int whichDatabase, TableDialog tableDialog, int whichTable, DataTable dataTable, DataTable columns, int cellX, int cellY)
@@ -119,7 +119,7 @@ namespace ClassLibrary
                     {
                     set += $"{columns.Rows[i].ItemArray[0]} = '{value}'";
                     }
-                    else if((string)columns.Rows[i].ItemArray[1] == "integer")
+                    else if((string)columns.Rows[i].ItemArray[1] == "integer" || (string)columns.Rows[i].ItemArray[1] == "int")
                     {
                     set += $"{columns.Rows[i].ItemArray[0]} = {value}";    
                     }

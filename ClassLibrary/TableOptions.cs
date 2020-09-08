@@ -9,6 +9,9 @@ namespace ClassLibrary
             Add("--Print Table--");
             Add("--Edit table--");
             Add("--Add new row--");
+            Add("--Add new column--");
+            Add("--Delete column--");
+            Add("--Delete row--");
             Add("--Delete Table--");
             Add("--Return--");
         }
@@ -23,15 +26,24 @@ namespace ClassLibrary
                 TablePrinter.Print(ConnectionString, ServerType, databaseDialog, whichDatabase, tableDialog, whichTable, this);
                 break;
                 case 1:
-                TableEditor.Control(ConnectionString, ServerType, databaseDialog, whichDatabase, tableDialog, whichTable, this);
+                TableEditor.SelectCell(ConnectionString, ServerType, databaseDialog, whichDatabase, tableDialog, whichTable, this);
                 break;
                 case 2:
                 RowAdder.Add(ConnectionString, ServerType, databaseDialog, whichDatabase, tableDialog, whichTable, this);
                 break;
                 case 3:
-                TableDeleter.Delete(ConnectionString, ServerType, databaseDialog, whichDatabase, tableDialog, whichTable, this);
+                ColumnAdder.Add(ConnectionString, ServerType, databaseDialog, whichDatabase, tableDialog, whichTable, this);
                 break;
                 case 4:
+                ColumnDeleter.SelectColumn(ConnectionString, ServerType, databaseDialog, whichDatabase, tableDialog, whichTable, this);
+                break;
+                case 5:
+                RowDeleter.SelectRow(ConnectionString, ServerType, databaseDialog, whichDatabase, tableDialog, whichTable, this);
+                break;
+                case 6:
+                TableDeleter.Delete(ConnectionString, ServerType, databaseDialog, whichDatabase, tableDialog, whichTable, this);
+                break;
+                case 7:
                 tableDialog.Start(databaseDialog, whichDatabase, this);
                 break;
 

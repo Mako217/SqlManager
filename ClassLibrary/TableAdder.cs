@@ -63,7 +63,7 @@ namespace ClassLibrary
                 connection.Open();
                 NpgsqlCommand command = new NpgsqlCommand($"CREATE Table {tableName} ({columnString})", connection);
 
-                Console.WriteLine(command);
+                Console.WriteLine($"CREATE Table {tableName} ({columnString})", connection);
                 command.ExecuteNonQuery();
                 command.Dispose();
                 connection.Close();

@@ -12,7 +12,7 @@ namespace SqlManager
 
             
             //Pass your connection string without Initial Catalog/Database
-            string ConnectionString = "Your connection string";
+            string ConnectionString = "Data Source = Michał; Integrated Security = True;";
 
 
             string serverType = "";
