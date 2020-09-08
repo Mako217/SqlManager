@@ -26,6 +26,9 @@ Poruszać się po tym menu można w ten sam sposób jak po poprzednim. Po zatwie
 - ***--Print table--*** - pozwalająca wyświetlić wybraną tabelę.
 - ***--Edit table--*** - pozwalająca edytować konkretną komórkę w tabeli.
 - ***--Add new row--*** - pozwalająca dodać nowy wiersz do tabeli.
+- ***--Add new column--*** - pozwalająca dodać nową kolumnę do tabeli.
+- ***--Delete row--*** - pozwalająca wybrać i usunąć wiersz z tabeli.
+- ***--Delete column--*** - pozwalająca wybrać i usunąć kolumnę z tabeli.
 - ***--Delete table--*** - pozwalająca usunąć aktualnie wybraną tabelę.
 - ***--Return--*** - pozwalająca powrócić do poprzedniego menu.
 
@@ -36,7 +39,7 @@ Program tworzy obiekty ***databaseDialog***, ***tableDialog***, oraz ***tableOpt
 
 ## ClassLibrary
 
-Jest to biblioteka klas, zawierająca 11 klas, w tym 7 klas statycznych i jedną klasę abstrakcyjną
+Jest to biblioteka klas, zawierająca 13 klas, w tym 9 klas statycznych i jedną klasę abstrakcyjną
 
 ### Dialog
 
@@ -84,17 +87,32 @@ Jest to klasa statyczna, zawierająca statyczną metodę ***Delete()***, pozwala
 
 ### TablePrinter
 
-Jest to klasa statyczna, która zawiera dwie metody statyczne:
-- ***Print*** - pozwalająca wyświetlić aktualnie wybraną tablicę w formie graficznej.
-- ***PrintEdit*** - pozwalająca wyświetlić aktualnie wybraną tablicę, zaznaczając kolorem, aktualnie wybraną komórkę.
-
+Jest to klasa statyczna, która zawiera cztery metody statyczne:
+- ***Print()*** - pozwalająca wyświetlić aktualnie wybraną tablicę w formie graficznej.
+- ***PrintCellSelector()*** - pozwalająca wyświetlić aktualnie wybraną tablicę, zaznaczając kolorem aktualnie wybraną komórkę.
+- ***PrintColumnSelector()*** - pozwalająca wyświetlić aktualnie wybraną tablicę, zaznaczając kolorem aktualnie wybraną kolumnę.
+- ***PrintRowSelector()*** - pozwalająca wyświetlić aktualnie wybraną tablicę, zaznaczając kolorem aktualnie wybrany wiersz.
 ### RowAdder
 
 Jest to klasa statyczna, zawierająca statyczną metodę ***Add()***, pozwalającą dodać nowy wiersz, do aktualnie wybranej tablicy.
+### ColumnAdder
+
+Jest to klasa statyczna, zawierająca statyczną metodę ***Add()***, pozwalająca dodać nową kolumnę, do aktualnie wybranej tablicy.
+### TableEditor
 
 Jest to funkcja statyczna, która zawiera dwie metody statyczne
-- ***Control*** - odpowiadająca za nawigację pomiędzy komórkami tablicy.
-- ***Edit*** - prywatna funkcja odpowiadająca za edytowanie zawartości aktualnie wybranej komórki.
+- ***SelectCell()*** - odpowiadająca za nawigację pomiędzy komórkami tablicy.
+- ***Edit()*** - prywatna funkcja odpowiadająca za edytowanie zawartości aktualnie wybranej komórki.
+### RowDeleter
+
+Jest to klasa statyczna, pozwalająca wybrać i usunąć dowolny wiersz w tabeli. Zawiera ona dwie metody:
+- ***SelectRow()*** - pozwalająca wybrać konkretny wiersz.
+- ***Delete()*** - wykonująca polecenie usunięcia wybranego wiersza
+### ColumnDeleter
+
+Jest to klasa statyczna, pozwalająca wybrać i usunąć dowolną kolumnę w tabeli. Zawiera ona dwie metody:
+- ***SelectColumn()*** - pozwalająca wybrać konkretną kolumnę.
+- ***Delete()*** - wykonująca polecenie usunięcia wybranej kolumny.
 
 
 
