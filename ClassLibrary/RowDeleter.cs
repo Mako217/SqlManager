@@ -13,8 +13,9 @@ namespace ClassLibrary
             DataTable columns = new DataTable();
             if(serverType == "MSSQL Server")
             {   
+                //If server type is MSSQL Server fill one DataTable with all table contents and second with column names and data types using SqlClient                
                 SqlConnection connection = new SqlConnection(connectionString + $"Initial Catalog={databaseDialog.options[whichDatabase]}");  
-
+                
                 SqlDataAdapter adapter = new SqlDataAdapter($"SELECT * FROM {tableDialog.options[whichTable]}", connection);
                 connection.Open();
                 adapter.Fill(dataTable);
@@ -25,6 +26,7 @@ namespace ClassLibrary
             }
             else if(serverType == "PostgreSQL")
             {
+                //If server type is PostgreSQL fill dataTable with column names and data types using Npgsql
                 NpgsqlConnection connection = new NpgsqlConnection(connectionString + $"Database={databaseDialog.options[whichDatabase]}");  
 
                 NpgsqlDataAdapter adapter = new NpgsqlDataAdapter($"SELECT * FROM {tableDialog.options[whichTable]}", connection);
@@ -35,8 +37,10 @@ namespace ClassLibrary
                 columnNames.Fill(columns);
                 connection.Close();
             }
+            //Set currently selected row to 0
             int whichRow = 0;
             bool inside = true;
+            //Print table with row 0 highlighted
             TablePrinter.PrintRowSelector(dataTable, columns, whichRow);
             while(inside)
             {
