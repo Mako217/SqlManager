@@ -12,9 +12,9 @@ namespace SqlManager
 
             
             //Pass your connection string without Initial Catalog/Database
-            string ConnectionString = "Data Source = Michał; Integrated Security = True;";
+            string ConnectionString = "Your connectionString;";
 
-
+            //Chceck if server connected is MSSQL Server or PostgreSQL
             string serverType = "";
             if(ConnectionString.Contains("Data Source") && ConnectionString.Contains("Integrated Security"))
             {
@@ -25,10 +25,11 @@ namespace SqlManager
                 serverType = "PostgreSQL";
             }
 
-
+            //Create databaseDialog, tableDialog and tableOptions objects
             DatabaseDialog databaseDialog = new DatabaseDialog(ConnectionString, serverType);
             TableDialog tableDialog = new TableDialog(ConnectionString, serverType);
             TableOptions tableOptions = new TableOptions(ConnectionString, serverType);
+            //Start the databaseDialog
             databaseDialog.Start(tableDialog, tableOptions);
 
         }

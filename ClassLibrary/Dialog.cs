@@ -20,6 +20,7 @@ namespace ClassLibrary
 
         public int Control()
         {
+            //Start with current option selected as 0, and draw the list of options
             currentOne = 0;
             inside = true;
             Draw();
@@ -58,6 +59,7 @@ namespace ClassLibrary
         }
         public void Add(string content)
         {
+            //Add new option to the options list
             options.Add(content);
         }
         private void Draw()
@@ -65,6 +67,7 @@ namespace ClassLibrary
             Console.Clear();
             for (int i = 0; i < options.Count; i++)
             {
+                //Draw the list of options, highlighting currently selected one as blue
                 if (i == currentOne)
                 {
                     Console.ForegroundColor = ConsoleColor.Blue;
