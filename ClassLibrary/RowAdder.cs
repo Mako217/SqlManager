@@ -45,11 +45,11 @@ namespace ClassLibrary
                 //Ask user for new value in column
                 Console.WriteLine("Add " + (string)row.ItemArray[0] + " value:");
                 //Create string containing values
-                if((string)row.ItemArray[1] == "varchar")
+                if((string)row.ItemArray[1] == "varchar" || (string)row.ItemArray[1] == "character varying")
                 {
                     values += "'" + Console.ReadLine() + "', ";
                 }
-                else
+                else if((string)row.ItemArray[1] == "int" || (string)row.ItemArray[1] == "integer")
                 {
                     values += Console.ReadLine() + ", ";
                 }
@@ -82,7 +82,7 @@ namespace ClassLibrary
             {
                 //If server type is PostgreSQL add new row using Npgsql
                 NpgsqlConnection connection = new NpgsqlConnection(connectionString + $"Database={databaseDialog.options[whichDatabase]}");
-                NpgsqlCommand command = new NpgsqlCommand($"INSERT INTO {tableDialog.options[whichTable]}({columns}) VALUES({values})", connection);
+                NpgsqlCommand command = new NpgsqlCommand($"INSERT INTO {tableDialog.options[whichTable]} VALUES ({values})", connection);
                 connection.Open();
                 try
                 {

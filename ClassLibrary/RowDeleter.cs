@@ -100,7 +100,7 @@ namespace ClassLibrary
             for(int i = 0; i<columns.Rows.Count; i++)
             {
                 deleteString += $"{columns.Rows[i].ItemArray[0]} = ";
-                if((string)columns.Rows[i].ItemArray[1] == "varchar")
+                if((string)columns.Rows[i].ItemArray[1] == "varchar" || (string)columns.Rows[i].ItemArray[1] == "character varying")
                 {
                     deleteString += $"'{dataTable.Rows[whichRow].ItemArray[i]}'AND ";
                 }

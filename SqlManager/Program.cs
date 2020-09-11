@@ -12,7 +12,7 @@ namespace SqlManager
 
             
             //Pass your connection string without Initial Catalog/Database
-            string ConnectionString = "Your connectionString;";
+            string ConnectionString = "Server=localhost; Port=5432; Uid=postgres; Pwd=***REMOVED***;";
 
             //Chceck if server connected is MSSQL Server or PostgreSQL
             string serverType = "";

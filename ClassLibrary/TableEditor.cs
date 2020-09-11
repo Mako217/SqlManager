@@ -122,7 +122,7 @@ namespace ClassLibrary
             for(int i = 0; i<dataTable.Rows[0].ItemArray.Length; i++)
             {
                 //Add to columnString "ColumnName = Value AND "
-                if((string)columns.Rows[i].ItemArray[1] == "varchar")
+                if((string)columns.Rows[i].ItemArray[1] == "varchar" || (string)columns.Rows[i].ItemArray[1] == "character varying")
                 {
                 columnString += $"{columns.Rows[i].ItemArray[0]} = '{dataTable.Rows[cellY].ItemArray[i]}' AND ";
                 }
@@ -133,7 +133,7 @@ namespace ClassLibrary
                 //Add to set string "ColumnName = Value"
                 if(i == cellX)
                 {
-                    if((string)columns.Rows[i].ItemArray[1] == "varchar")
+                    if((string)columns.Rows[i].ItemArray[1] == "varchar" || (string)columns.Rows[i].ItemArray[1] == "character varying")
                     {
                     set += $"{columns.Rows[i].ItemArray[0]} = '{value}'";
                     }

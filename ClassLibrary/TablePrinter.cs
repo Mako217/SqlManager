@@ -7,6 +7,77 @@ namespace ClassLibrary
 {
     public static class TablePrinter
     {
+        
+        public static void Print(DatabaseDialog databaseDialog, int whichDatabase, TableDialog tableDialog, int whichTable, TableOptions tableOptions, DataTable dataTable, DataTable columns)
+        {
+            Console.Clear();
+            //Print the table frames and content
+            ConsoleColor color = ConsoleColor.DarkGray;
+            Console.ForegroundColor = color;
+            Console.Write("|");
+            Console.ForegroundColor = ConsoleColor.White;
+            //Print first table name
+            Console.WriteLine($"{columns.Rows[0].ItemArray[0]}");
+            Console.SetCursorPosition(0,1);
+            Console.ForegroundColor = color;
+            Console.WriteLine(new string('=', (columns.Rows.Count)*20));
+            //Print every table name
+            for(int i=1; i<columns.Rows.Count; i++)
+            {
+                Console.SetCursorPosition(i*20, 0);
+                Console.Write("|");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write($"{columns.Rows[i].ItemArray[0]}");
+                Console.ForegroundColor = color;
+                Console.SetCursorPosition(i*20, 1);
+                Console.Write("|");
+            }
+            Console.SetCursorPosition(columns.Rows.Count * 20, 0);
+            Console.Write("|");
+            Console.SetCursorPosition(columns.Rows.Count * 20, 1);
+            Console.Write("|");
+            Console.SetCursorPosition(0, dataTable.Rows.Count + 2);
+            Console.WriteLine(new string('=', (columns.Rows.Count)*20));
+            Console.SetCursorPosition(0,1);
+            Console.Write("|");
+            Console.SetCursorPosition(0, dataTable.Rows.Count+2);
+            Console.Write("|");
+            Console.SetCursorPosition(0, 2);
+            //Print every item in the table
+            for (int i = 0; i < dataTable.Rows.Count; i++)
+            { 
+                Console.Write("|");
+                DataRow row = dataTable.Rows[i];
+                for (int j = 1; j <= row.ItemArray.Length; j++)
+                {
+                    var item = row.ItemArray[j - 1];
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.Write(item);
+                    if(item.ToString().Length == 0)
+                        {
+                            Console.Write("*Empty cell*");
+                        }
+                    Console.ForegroundColor = color;
+                    Console.SetCursorPosition(20 * j, i+2);
+                    Console.Write("|");
+                    Console.SetCursorPosition(20 *j, i+3);
+                    Console.Write("|");
+                    Console.SetCursorPosition(20 * j + 1, i+2);
+                }
+                Console.SetCursorPosition(0, i+3);
+            }
+            
+        
+            Console.ForegroundColor = ConsoleColor.White;
+            dataTable.Dispose();
+            columns.Dispose();
+            //Wait for user to press any key
+            Console.ReadKey();
+            Console.WriteLine("Returning...");
+            //Return to the tableOptions
+            tableOptions.Start(databaseDialog, whichDatabase, tableDialog, whichTable);
+    
+        }
        public static void Print(string connectionString, string serverType, DatabaseDialog databaseDialog, int whichDatabase, TableDialog tableDialog, int whichTable, TableOptions tableOptions)
         {
             DataTable dataTable = new DataTable();
