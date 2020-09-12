@@ -24,6 +24,7 @@ Zatwierdzenie bazy danych wyświetli menu zawierające wszystkie tabele znajduj�
 
 Poruszać się po tym menu można w ten sam sposób jak po poprzednim. Po zatwierdzeniu tabeli wyświetlone zostaną opcje zarządzania tabelą:
 - ***--Print table--*** - pozwalająca wyświetlić wybraną tabelę.
+- ***--Search table--*** - pozwalająca przeszukać tablicę pod kątem wpisanego tekstu.
 - ***--Edit table--*** - pozwalająca edytować konkretną komórkę w tabeli.
 - ***--Add new row--*** - pozwalająca dodać nowy wiersz do tabeli.
 - ***--Add new column--*** - pozwalająca dodać nową kolumnę do tabeli.
@@ -92,17 +93,28 @@ Jest to klasa statyczna, która zawiera cztery metody statyczne:
 - ***PrintCellSelector()*** - pozwalająca wyświetlić aktualnie wybraną tablicę, zaznaczając kolorem aktualnie wybraną komórkę.
 - ***PrintColumnSelector()*** - pozwalająca wyświetlić aktualnie wybraną tablicę, zaznaczając kolorem aktualnie wybraną kolumnę.
 - ***PrintRowSelector()*** - pozwalająca wyświetlić aktualnie wybraną tablicę, zaznaczając kolorem aktualnie wybrany wiersz.
+
+### TableSearcher
+
+Jest to klasa statyczna pozwalająca przeszukać tablicę pod kątem podanego przez użytkownika tekstu, po czym wyświetlić tylko te wiersze tablicy które odpowiadają wyszukiwaniu.
+Zawiera ona dwie metody:
+- ***Search()*** - przeszukującą tablicę pod kątem konkretnego tekstu
+- ***StringCreator()*** - będącą funkcją pomocniczą tworzącą string potrzebny do określenia tego w jaki sposób przeszukana ma być tablica.
+
 ### RowAdder
 
 Jest to klasa statyczna, zawierająca statyczną metodę ***Add()***, pozwalającą dodać nowy wiersz, do aktualnie wybranej tablicy.
+
 ### ColumnAdder
 
 Jest to klasa statyczna, zawierająca statyczną metodę ***Add()***, pozwalająca dodać nową kolumnę, do aktualnie wybranej tablicy.
+
 ### TableEditor
 
 Jest to funkcja statyczna, która zawiera dwie metody statyczne
 - ***SelectCell()*** - odpowiadająca za nawigację pomiędzy komórkami tablicy.
 - ***Edit()*** - prywatna funkcja odpowiadająca za edytowanie zawartości aktualnie wybranej komórki.
+
 ### RowDeleter
 
 Jest to klasa statyczna, pozwalająca wybrać i usunąć dowolny wiersz w tabeli. Zawiera ona dwie metody:
